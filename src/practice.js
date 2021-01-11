@@ -6,4 +6,12 @@ const knexInstance = knex({
   connection: process.env.DB_URL,
 })
 
-console.log('knex and driver installed correctly')
+const searchTerm = 'holo'
+
+knexInstance
+.select('product_id', 'name', 'price', 'category')
+.from('amazong_products')
+.where('name', 'ILIKE', `%${searchTerm}%`)
+.then(result => {
+    console.log(result)
+})
